@@ -13,8 +13,9 @@ function Save() {
     if (Object.keys(data).length) {// オブジェクトがある時
       chrome.tabs.getSelected(function(tab) { 
 
-        alert(typeof(data));
+        // alert(typeof(data));
 
+        // URLに紐づくメモが存在するかどうかをチェックしてindexを返す
         let elm = data.fruits;
         for (let i=0; i < elm.length; i++){
           console.log(elm[i].url);
@@ -22,7 +23,8 @@ function Save() {
             var num = [i];
           }
         }
-        if(num == undefined){
+
+        if(num == undefined){// 新しいページへのメモの時
           const newFruit = {};
           
           let message = document.getElementById('input_message').value;
@@ -31,7 +33,7 @@ function Save() {
           newFruit.url = tab.url;
           var nextFruits = data.fruits.concat(newFruit); 
 
-        }else{
+        }else{// 同じURL上にメモがある時は上書きをする
           let newFruit = {};
           let message = document.getElementById('input_message').value;
           newFruit.message = message;  

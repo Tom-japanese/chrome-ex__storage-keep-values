@@ -7,19 +7,34 @@
     <script src="jquery-2.2.0.min.js"></script>
     <style>
       body {
-        width: 200px;
+        padding: 15px;
+        margin: 0;
       }
       .box{
         border: solid 1px #ccc;
         padding: 10px;
         word-wrap: break-word;
       }
+      /* button{
+        margin-top: 5px;
+        appearance: none;
+        border: 0;
+        border-radius: 3px;
+        background: #000000;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        width: 60px;
+        margin-left: auto;
+      } */
     </style>
   </head>
   <body>
     <form>
-      <input type="textbox" id="input_message">
-      <button id="save_button">保存</button>
+      <textarea name="memo" rows="10" cols="40" id="input_message"></textarea>
+      <!-- <button id="save_button">保存</button> -->
     </form>
     <script src="popup.js"></script>
   </body>

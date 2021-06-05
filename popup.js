@@ -11,6 +11,7 @@ function Save() {
   // ↓上手く行った３号
   chrome.storage.local.get('fruits', function ( data ) {
     if (Object.keys(data).length) {// オブジェクトがある時
+      
       chrome.tabs.getSelected(function(tab) { 
 
         // alert(typeof(data));
@@ -174,7 +175,7 @@ function Save() {
   // });
 }
 
-document.getElementById('save_button').addEventListener('click', Save);　　// 保存ボタン（save_button）がクリックされたらSave関数を実行
+document.getElementById('input_message').addEventListener('change', Save);　　// 保存ボタン（save_button）がクリックされたらSave関数を実行
 
 
 
@@ -186,10 +187,23 @@ document.getElementById('save_button').addEventListener('click', Save);　　// 
 コメントアウト
 ==================================================  */
 
-// function Load() {
-//   chrome.storage.local.get('Alertmsg', function (items) {
-//     document.getElementById('input_message').value = items.Alertmsg;  // Alertmsgキーと対に記録された文字列を、idがinput_messageのテキストボックスに出力
-//   });
-// }
+function Load() {
+  chrome.storage.local.get('fruits', function (data) {
+    chrome.tabs.getSelected(function(tab) { 
+      // URLに紐づくメモが存在するかどうかをチェックしてindexを返す
+      let elm = data.fruits;
+      for (let i=0; i < elm.length; i++){
+        console.log(elm[i].url);
+        if(elm[i].url == tab.url){
+          var num = [i];
+        }
+      }
+      if(num !== undefined){// 新しいページへのメモの時
+        console.log(data.fruits[num]);
+        document.getElementById('input_message').value = data.fruits[num].message;  
+      }
+    });
+  });
+}
 
-// document.addEventListener('DOMContentLoaded', Load);  // オプションページ（options.html）の読み込みと解析が完了したらLoad関数を実行
+document.addEventListener('DOMContentLoaded', Load);  // オプションページ（options.html）の読み込みと解析が完了したらLoad関数を実行

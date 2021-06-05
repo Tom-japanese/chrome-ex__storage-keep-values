@@ -174,8 +174,15 @@ function Save() {
   //   }
   // });
 }
-
-document.getElementById('input_message').addEventListener('change', Save);　　// 保存ボタン（save_button）がクリックされたらSave関数を実行
+/* ==================================================
+【改善点】
+セーブのタイミングで拡張機能を開いた状態でタブを移動すると移動先として登録されちゃう…
+フォームの操作後一定の時間が経ったら保存するようにした方がいいのかも…
+==================================================  */
+document.getElementById('input_message').addEventListener('change', Save);
+// window.onblur = function () {
+// 	Save();
+// };
 
 
 
@@ -189,21 +196,26 @@ document.getElementById('input_message').addEventListener('change', Save);　　
 
 function Load() {
   chrome.storage.local.get('fruits', function (data) {
-    chrome.tabs.getSelected(function(tab) { 
-      // URLに紐づくメモが存在するかどうかをチェックしてindexを返す
-      let elm = data.fruits;
-      for (let i=0; i < elm.length; i++){
-        console.log(elm[i].url);
-        if(elm[i].url == tab.url){
-          var num = [i];
+      chrome.tabs.getSelected(function(tab) { 
+        // URLに紐づくメモが存在するかどうかをチェックしてindexを返す
+        let elm = data.fruits;
+        for (let i = 0; i < elm.length; i++){
+          console.log(elm[i].url);
+          if(elm[i].url == tab.url){
+            var num = i;
+          }
         }
-      }
-      if(num !== undefined){// 新しいページへのメモの時
-        console.log(data.fruits[num]);
-        document.getElementById('input_message').value = data.fruits[num].message;  
-      }
-    });
+        if(num == undefined){// 新しいページへのメモの時
+        }else{
+          console.log(data.fruits[num]);
+          document.getElementById('input_message').value = data.fruits[num].message;  
+
+        }
+      });
+
   });
 }
 
 document.addEventListener('DOMContentLoaded', Load);  // オプションページ（options.html）の読み込みと解析が完了したらLoad関数を実行
+
+

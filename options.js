@@ -7,9 +7,10 @@ function load(){
       elm += `
       <div class="box">
         <div class="box-title"><a href="${data.fruits[i].url}" target="_blank">${data.fruits[i].title}</a>
-        <span>${data.fruits[i].url}</span></div>
-        <div class="box-message">${data.fruits[i].message}</div>
-        <button class="remove">削除</button>
+        </div>
+        <div class="box-message"><span>メモ<button class="remove">削除</button></span>${data.fruits[i].message}
+        </div>
+        <a href="${data.fruits[i].url}" target="_blank" class="box-link">リンク先へ</a>
       </div>
       `
   

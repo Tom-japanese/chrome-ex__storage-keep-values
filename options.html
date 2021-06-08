@@ -3,26 +3,40 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8">
   <style>
+    *{
+      box-sizing: border-box;
+      line-height: 1.6;
+    }
     body{
       padding: 40px 0;
+      background: #eee;
+    }
+    #storage{
+      display: flex;
+      flex-flow: wrap;
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
     }
     .box{
-      border-top: solid 1px #ccc;
-      display: flex;
-      width: 90%;
-      margin:0 auto;
-      padding-top: 15px;
+      display: block;
+      width: calc(100% / 3 - 20px);
+      margin:0;
+      background: white;
+      padding: 20px;
+      margin-right: 20px;
+      margin-top: 30px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,.1);
     }
-    .box + .box{
-      margin-top: 15px;
+    .box:nth-child(3n){
+      margin-right: 0;
     }
     .box-title{
-      width: 40%;
+      font-size: 18px;
+    font-weight: bold;
     }
     .box-title a{
       display: inline-block;
-      font-size: 14px;
-      line-height: 1.6;
       text-decoration: none;
       word-break: break-all;
 
@@ -35,13 +49,35 @@
     color: gray;
     }
     .box-message{
-      padding-left: 30px;
-      width: 60%;
-      white-space:pre;
+      white-space:pre-wrap;
+      margin-top: 10px;
+    }
+    .box-message span{
+      display: block;
+      border-bottom: solid 1px;
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+      position: relative;
+    }
+    .box-link{
+      display: block;
+      border: solid 1px;
+      text-align: center;
+      border-radius: 100px;
+      padding: 10px;
+      text-decoration: none;
+      margin-top: 10px;
     }
     .remove{
       color: red;
       cursor: pointer;
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border: none;
+      background: transparent;
+      font-size: 12px;
     }
   </style>
 </head>

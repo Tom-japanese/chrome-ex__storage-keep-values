@@ -8,6 +8,7 @@
 
 
 function Save() {
+  document.getElementById('confirm').textContent = '保存しました!';
   // ↓上手く行った３号
   chrome.storage.local.get('fruits', function ( data ) {
     if (Object.keys(data).length) {// オブジェクトがある時
@@ -179,10 +180,20 @@ function Save() {
 セーブのタイミングで拡張機能を開いた状態でタブを移動すると移動先として登録されちゃう…
 フォームの操作後一定の時間が経ったら保存するようにした方がいいのかも…
 ==================================================  */
-document.getElementById('input_message').addEventListener('change', Save);
-// window.onblur = function () {
-// 	Save();
-// };
+// ↓ タイマー処理
+let id;
+function countDown(e){
+  clearTimeout(id);// タイマーストップ
+  id = setTimeout(Save,1000);// タイマーリセット
+  console.log(e.target.value);// 入力テキスト確認
+}
+
+function removeText(){
+  document.getElementById('confirm').textContent = '';
+}
+
+document.getElementById('input_message').addEventListener('input', countDown);
+document.getElementById('input_message').addEventListener('input',removeText );
 
 
 

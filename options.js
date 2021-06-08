@@ -55,3 +55,8 @@ function remove(index){
     load();
   });
 }
+
+document.getElementById('allRemove').onclick = function() {
+  chrome.storage.local.clear();
+  window.location.reload();
+};
